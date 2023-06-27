@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 
 	va_start(var, format);
 	if (format == NULL) /* IF format is NULL */
-		return (-1);
+		return (0);
 	while (format[i]) /* Iterating through the characters of format */
 	{
 		if (format[i] != '%') /* To avoid printing percent char */
