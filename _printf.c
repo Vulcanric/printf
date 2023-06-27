@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * _printf - writes formatted output to the stdout
  * @format: pointer the string to print
@@ -9,43 +8,44 @@
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, counter = 0;
-	char *buff;
-	size_t buffsize;
+	int i = 0, size = 0, counter = 0;
+	char ch, *buff;
 	va_list var;
 
 	va_start(var, format);
 	if (format) /* IF format is not NULL */
 	{
 		while (format[i]) /* Iterating through the characters of format */
-		{/* Allocating memory for buffer */
-			buff = malloc(sizeof(char));
-			if (buff == NULL)
-				return (0);
-			*buff = format[i];/* Handling malloc return */
+		{
+			if (format[i] != '%') /* To avoid printing percent char */
+				ch = format[i];
+			size = 1;
 			if (format[i] == '%') /* IF a '%' character is found ...*/
 			{
-				switch (format[i + 1]) /* Examine the next character*/
-				{
-					case 'c':
-						*buff = va_arg(var, int);
-						break;
-					case 's':
-						_strcpy(buff, va_arg(var, char *));
-						break;
-					case '%':
-						*buff = '%';
-						break;
-					default:
-						break;
-				}
-				i++; /* To jump over the conversion char */
+			switch (format[i + 1]) /* Examine the next character*/
+			{
+				case 'c':
+					ch = va_arg(var, int);
+					break;
+				case 's':
+					buff = va_arg(var, char *);
+					size = _strlen(buff);
+					if (buff) /* IF not null */
+					write(1, buff, size);
+					break;
+				case '%':
+					ch = '%';
+					break;
+				default: /* let ch be the next char after "% default" */
+					ch = format[i + 2];
+					i++;
+					break;
 			}
-			buffsize = _strlen(buff);
-			write(1, buff, buffsize);
-			counter += buffsize;
+			i++; /* To jump over the conversion char */
+			}
+			write(1, &ch, 1);
+			counter += size;
 			i++;
-			free(buff);
 		}
 	}
 	va_end(var);
@@ -67,25 +67,4 @@ unsigned int _strlen(char *str)
 		len++;
 	}
 	return (len);
-}
-
-/**
- * _strcpy - Copies the content of a string into another string
- * @dest: destination string of the copied string
- * @src: source string of the copied string
- * Return: destination string having a copy of source string
- */
-char *_strcpy(char *dest, char *src)
-{
-	int i = 0;
-
-	while (src[i])
-		i++;
-
-	while (i >= 0)
-	{
-		dest[i] = src[i];
-		i--;
-	}
-	return (dest);
 }
