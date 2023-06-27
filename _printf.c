@@ -15,17 +15,14 @@ int _printf(const char *format, ...)
 	va_list var;
 
 	va_start(var, format);
-
 	if (format) /* IF format is not NULL */
 	{
 		while (format[i]) /* Iterating through the characters of format */
-		{
-			/* Allocating memory for buffer */
+		{/* Allocating memory for buffer */
 			buff = malloc(sizeof(char));
-			if (buff == NULL) /* Handling malloc return */
-				return -1;
-
-			*buff = format[i];
+			if (buff == NULL)
+				return (0);
+			*buff = format[i];/* Handling malloc return */
 			if (format[i] == '%') /* IF a '%' character is found ...*/
 			{
 				switch (format[i + 1]) /* Examine the next character*/
@@ -46,8 +43,8 @@ int _printf(const char *format, ...)
 			}
 			buffsize = _strlen(buff);
 			write(1, buff, buffsize);
-			i++;
 			counter += buffsize;
+			i++;
 			free(buff);
 		}
 	}
