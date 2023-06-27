@@ -12,17 +12,17 @@ int _printf(const char *format, ...)
 	va_list var;
 
 	va_start(var, format);
-	if (format) /* IF format is not NULL */
+	if (format == NULL) /* IF format is NULL */
+		return (-1);
+	while (format[i]) /* Iterating through the characters of format */
 	{
-		while (format[i]) /* Iterating through the characters of format */
+		if (format[i] != '%') /* To avoid printing percent char */
 		{
-			if (format[i] != '%') /* To avoid printing percent char */
-			{
-				_putchar(format[i]);
-				counter++;
-			}
-			else /* IF a '%' character is found ...*/
-			{
+			_putchar(format[i]);
+			counter++;
+		}
+		else /* IF a '%' character is found ...*/
+		{
 			switch (format[i + 1]) /* Examine the next character*/
 			{
 				case 'c':
@@ -45,10 +45,9 @@ int _printf(const char *format, ...)
 				default:
 					break;
 			}
-				i++; /* To jump over to the conversion char */
-			}
-			i++; /* Jump over to the next character */
+			i++; /* To jump over to the conversion char */
 		}
+		i++; /* Jump over to the next character */
 	}
 	va_end(var);
 	return (counter);
