@@ -3,13 +3,12 @@
  * _printf - writes formatted output to the stdout
  * @format: pointer the string to print
  * @...: Variable arguments
- *
  * Return: Number of characters printed
  */
 int _printf(const char *format, ...)
 {
 	int i = 0, size = 0, counter = 0;
-	char ch, *buff;
+	char *buff;
 	va_list var;
 
 	va_start(var, format);
@@ -18,34 +17,37 @@ int _printf(const char *format, ...)
 		while (format[i]) /* Iterating through the characters of format */
 		{
 			if (format[i] != '%') /* To avoid printing percent char */
-				ch = format[i];
-			size = 1;
-			if (format[i] == '%') /* IF a '%' character is found ...*/
+			{
+				_putchar(format[i]);
+				counter++;
+			}
+			else /* IF a '%' character is found ...*/
 			{
 			switch (format[i + 1]) /* Examine the next character*/
 			{
 				case 'c':
-					ch = va_arg(var, int);
+					_putchar(va_arg(var, int));
+					counter++;
 					break;
 				case 's':
 					buff = va_arg(var, char *);
-					size = _strlen(buff);
 					if (buff) /* IF not null */
-					write(1, buff, size);
+					{
+						size = _strlen(buff);
+						write(1, buff, size);
+						counter += size;
+					}
 					break;
 				case '%':
-					ch = '%';
+					_putchar('%');
+					counter++;
 					break;
-				default: /* let ch be the next char after "% default" */
-					ch = format[i + 2];
-					i++;
+				default:
 					break;
 			}
-			i++; /* To jump over the conversion char */
+				i++; /* To jump over to the conversion char */
 			}
-			write(1, &ch, 1);
-			counter += size;
-			i++;
+			i++; /* Jump over to the next character */
 		}
 	}
 	va_end(var);
