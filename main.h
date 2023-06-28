@@ -14,13 +14,14 @@ typedef void UNUSED;
 
 /* Prototypes of functions */
 int _printf(const char *format, ...);
-int printChar(va_list ap, int flag, int width, int precision, int len_modif);
-int printStr(va_list ap, int flag, int width, int precision, int len_modif);
+int printChar(char spec, va_list ap, char *buff, int flag, int width, int precision, int len_modif);
+int printStr(char spec, va_list ap, char *buff, int flag, int width, int precision, int len_modif);
+int printRot13(char spec, va_list ap, char *buff, int flag, int width, int precision, int len_modif);
 
 
 /* Functions for finding the value of formatting options */
-int find_flag(char const *format, current_ind);
-int find_width(char const *format, current_ind);
+int find_flag(char const *format, int current_ind);
+int find_width(char const *format, va_list ap, int current_ind);
 int find_precision(char const *format, current_ind);
 int find_len_modif(char const *format, current_ind);
 
