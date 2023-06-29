@@ -7,65 +7,35 @@
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, size = 0, counter = 0;
-	char *buff;
-	va_list var;
+	int i = 0, conv_spec, char_printed = 0, total_char_printed = 0;
+	char buff[BUFFSIZE];
+	int flag, width, precision, len_modif;
+	va_list all;
 
-	va_start(var, format);
+	va_start(all, format);
 	if (format == NULL) /* IF format is NULL */
-		return (0);
+		return (-1);
+
 	while (format[i]) /* Iterating through the characters of format */
 	{
 		if (format[i] != '%') /* To avoid printing percent char */
+			char_printed += _putchar(format[i]);
+		else
 		{
-			_putchar(format[i]);
-			counter++;
-		}
-		else /* IF a '%' character is found ...*/
-		{
-			switch (format[i + 1]) /* Examine the next character*/
-			{
-				case 'c':
-					_putchar(va_arg(var, int));
-					counter++;
-					break;
-				case 's':
-					buff = va_arg(var, char *);
-					if (buff) /* IF not null */
-					{
-						size = _strlen(buff);
-						write(1, buff, size);
-						counter += size;
-					}
-					break;
-				case '%':
-					_putchar('%');
-					counter++;
-					break;
-				default:
-					break;
-			}
-			i++; /* To jump over to the conversion char */
-		}
-		i++; /* Jump over to the next character */
-	}
-	va_end(var);
-	return (counter);
-}
+			flag = find_flag(format, &i);
+			width = find_width(format, all, &i);
+			precision = find_precision(format, &i);
+			len_modif = find_len_modif(format, &i);
+			conv_spec = find_conv_spec(format, &i);
 
-/**
- * _strlen - returns the length of a string
- * @str: Pointer to the string to find it's length
- * Return: length of the string
- */
-unsigned int _strlen(char *str)
-{
-	unsigned int len = 0;
-
-	while (*str)
-	{
-		str++;
-		len++;
+			if (handleformt(conv_spec) == 0)
+				break;
+			total_char_printed += handleformt(conv_spec)(all, buff, flag, width, precision, len_modif);
+		}
+		i++;
 	}
-	return (len);
+	va_end(all);
+	total_char_printed += char_printed;
+
+	return (total_char_printed);
 }
