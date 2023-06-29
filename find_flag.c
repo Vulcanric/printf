@@ -1,37 +1,42 @@
 #include "main.h"
 
 /**
- * find_flag - Searches for the flag character after the '%' char in
- * the format string
+ * find_flag - Finds the flag option in the format string
  * @format: The format string to examine
  * @current_ind: The current index where the '%' char is found
- * Return: flag character
+ * Return: flags if founded, else 0;
  */
-int find_flag(const char *format, va_list ap, int current_ind)
+int find_flag(const char *format, int *current_ind)
 {
-	int flag_found = 0;
-	int ind = current_ind + 1;
+	int j;
+	int i = *current_ind + 1;
+	char flags[] = "+ #";
+	char num_rep[] = "123";
 
-	for (; format[ind] != '\0'; ind++)
+	/* Examine two char after the percent '%' char */
+	for (; format[i] != format[*current_ind + 3] || format[i];)
 	{
-		if (format[i] == '+')
+		for (j = 0; flags[j]; j++)
 		{
-			flag_found = '+';
-			va_arg(ap, int);
-		}
-		if (format[i] == ' ')
-		{
-			flag_found = ' ';
-			va_arg(ap, int);
-		}
-		if (format[i] == '#')
-		{
-			flag_found = '#';
-			va_arg(ap, unsigned int);
+			if (format[i] == flags[j])
+				break;
 		}
 
-		if (flag_found != 0)
-			return (flag_found);
+		if (flags[j] == '\0') /* IF flag is not found ...*/
+			return (0);
+
+		if (num_rep[j] == 2) /* To ignore space */
+		{
+			i++; /* Go to the next option */
+			/* and update current index to be the next option */
+			*current_ind += 1;
+		}
+
+		else
+		{
+			*current_ind += 1;
+			return (num_rep[j]);
+		}
 	}
-	return (-1);
+	return (0);
 }
