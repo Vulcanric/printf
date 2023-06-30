@@ -18,11 +18,16 @@ typedef struct format
 
 /* Prototypes of functions */
 int _printf(const char *format, ...);
-int printChar(va_list ap, char *buff, int flag, int width, int precision, int len_modif);
-int printStr(va_list ap, char *buff, int flag, int width, int precision, int len_modif);
-int printPercent(va_list ap, char *buff, int flag, int width, int precision, int len_modif);
-int printInt(va_list ap, char *buff, int flag, int width, int precision, int len_modif);
-int printRot13(va_list ap, char *buff, int flag, int width, int precision, int len_modif);
+int printChar(va_list ap, char *buff, int flag, int width,
+		int precision, int len_modif);
+int printStr(va_list ap, char *buff, int flag, int width,
+		int precision, int len_modif);
+int printPercent(va_list ap, char *buff, int flag, int width,
+		int precision, int len_modif);
+int printInt(va_list ap, char *buff, int flag, int width,
+		int precision, int len_modif);
+int printRot13(va_list ap, char *buff, int flag, int width,
+		int precision, int len_modif);
 int (*handleformt(char conv_spec))(va_list, char *, int, int, int, int);
 
 /* Functions for finding the value of formatting options */
