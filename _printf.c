@@ -28,8 +28,10 @@ int _printf(const char *format, ...)
 			len_modif = find_len_modif(format, &i);
 			conv_spec = find_conv_spec(format, &i);
 
+			/* If the conversion char does not match the required */
 			if (handleformt(conv_spec) == 0)
-				break;
+				return (-1);
+
 			total_char_printed += handleformt(conv_spec)(all, buff, flag, width, precision, len_modif);
 		}
 		i++;
