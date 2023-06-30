@@ -39,6 +39,7 @@ int find_conv_spec(char const *format, int *current_ind);
 
 /* Other helpful prototypes */
 int printBuffer(char *buff);
+int print_num_assist(int n);
 int _putchar(char c);
 int isDigit(int c);
 int countDigit(int n);
