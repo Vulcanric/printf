@@ -23,7 +23,7 @@ int printStr(va_list ap, char *buff, int flag, int width,
 	if (buff == NULL)
 	{
 		buff = "(null)";
-		printBuffer(buff);
+		char_printed = printBuffer(buff);
 	}
 
 	else
