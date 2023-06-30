@@ -11,6 +11,9 @@ int (*handleformt(char conv_spec))(va_list ap, char *buff, int, int, int, int)
 	format functions[] = {
 		{'c', printChar},
 		{'s', printStr},
+		{'%', printPercent},
+		{'d', printInt},
+		{'i', printInt},
 		{0, 0}
 	};
 	int i = 0;
