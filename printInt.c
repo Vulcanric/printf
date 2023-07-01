@@ -15,14 +15,23 @@
 int printInt(va_list ap, char __attribute__((unused))*buff, int flag,
 		int width, int precision, int len_modif)
 {
-	int numberD_printed = 0;
-	int num = va_arg(ap, int);
+	int numberD_printed = 0, padd;
+	int num;
 	(void)ap;
-	(void)flag;
-	(void)width;
 	(void)precision;
 	(void)len_modif;
+	num = va_arg(ap, int);
 
+	if (flag == '1') /* IF flag is equal to '+' */
+	{
+		if (num > 0)
+			numberD_printed += _putchar('+');
+	}
+	if (width != 0)
+	{
+		for (padd = (width - 2); padd > 0; padd--)
+			numberD_printed += _putchar(' ');
+	}
 	numberD_printed += print_num_assist(num);
 
 	return (numberD_printed);
