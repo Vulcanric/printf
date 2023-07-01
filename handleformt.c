@@ -14,6 +14,7 @@ int (*handleformt(char conv_spec))(va_list ap, char *buff, int, int, int, int)
 		{'%', printPercent},
 		{'d', printInt},
 		{'i', printInt},
+		{'r', printRev},
 		{0, 0}
 	};
 	int i = 0;
