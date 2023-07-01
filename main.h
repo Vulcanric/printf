@@ -26,6 +26,8 @@ int printPercent(va_list ap, char *buff, int flag, int width,
 		int precision, int len_modif);
 int printInt(va_list ap, char *buff, int flag, int width,
 		int precision, int len_modif);
+int printRev(va_list ap, char *buff, int flag, int width,
+		int precision, int len_modif)
 int printRot13(va_list ap, char *buff, int flag, int width,
 		int precision, int len_modif);
 int (*handleformt(char conv_spec))(va_list, char *, int, int, int, int);
