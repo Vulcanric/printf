@@ -35,6 +35,12 @@ int print_bin_assist(int n)
 {
 	int counter = 0;
 
+	if (n < 0)
+	{
+		counter += 1;
+		n = n * -1;
+	}
+
 	if (n > 1) /* Conversion can only be done for numbers above 1 */
 	{
 		counter += print_bin_assist(n / 2);
