@@ -4,7 +4,6 @@
 /* Header files needed */
 #include <stdarg.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 /* Structures and Typedef */
 typedef struct format
@@ -27,8 +26,10 @@ int printPercent(va_list ap, char *buff, int flag, int width,
 int printInt(va_list ap, char *buff, int flag, int width,
 		int precision, int len_modif);
 int printRev(va_list ap, char *buff, int flag, int width,
-		int precision, int len_modif)
+		int precision, int len_modif);
 int printRot13(va_list ap, char *buff, int flag, int width,
+		int precision, int len_modif);
+int printBin(va_list ap, char *buff, int flag, int width,
 		int precision, int len_modif);
 int (*handleformt(char conv_spec))(va_list, char *, int, int, int, int);
 
@@ -42,6 +43,7 @@ int find_conv_spec(char const *format, int *current_ind);
 /* Other helpful prototypes */
 int printBuffer(char *buff);
 int print_num_assist(int n);
+int print_bin_assist(int n);
 int _putchar(char c);
 int isDigit(int c);
 int countDigit(int n);
