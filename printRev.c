@@ -13,20 +13,27 @@
 int printRev(va_list ap, char *buff, int flag, int width,
 		int precision, int len_modif)
 {
-	int i, len = 0, char_printed = 0;
-	(void)ap;
+	int char_printed, i;
+
 	(void)flag;
 	(void)width;
 	(void)precision;
 	(void)len_modif;
 
 	buff = va_arg(ap, char *);
-	for (i = 0; buff[i]; i++)
-		len++;
-
-	for (; len >= 0; len--)
+	i = 0;
+	char_printed = 0;
+	while (buff[i])
 	{
-		char_printed += _putchar(buff[len]);
+		char_printed++;
+		i++;
+	}
+
+	i--;
+	while (i >= 0)
+	{
+		_putchar(buff[i]);
+		i--;
 	}
 
 	return (char_printed);
