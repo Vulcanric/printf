@@ -30,7 +30,7 @@ int _printf(const char *format, ...)
 
 			/* If the conversion char does not match the required */
 			if (handleformt(conv_spec) == 0)
-				return (-1);
+				return (0);
 
 			total_char_printed += handleformt(conv_spec)(all, buff, flag, width, precision, len_modif);
 		}
