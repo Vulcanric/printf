@@ -22,18 +22,19 @@ int find_flag(const char *format, int *current_ind)
 				break;
 		}
 
-		if (flags[j] == '\0') /* IF flag is not found ...*/
+		if (flags[j] == '\0')
 			return (0);
 
-		if (num_rep[j] == 2) /* To ignore space */
+		if (flags[j] == ' ') /* To ignore space */
 		{
+			*current_ind += 1; /* and update current index to be the next option */
 			i++; /* Go to the next option */
-			/* and update current index to be the next option */
-			*current_ind += 1;
 		}
 
 		else
-		{
+		{/* IF the next character is a ' ' char */
+			if (format[i + 1] == flags[1])
+				*current_ind += 1; /* Increment the index twice to be on the ' ' char */
 			*current_ind += 1;
 			return (num_rep[j]);
 		}
