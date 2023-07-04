@@ -22,6 +22,8 @@ int _printf(const char *format, ...)
 			char_printed += _putchar(format[i]);
 		else
 		{
+			if (format[i + 1] == '%')
+				_putchar(format[i + 1]);
 			flag = find_flag(format, &i);
 			width = find_width(format, all, &i);
 			precision = find_precision(format, &i);
