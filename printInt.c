@@ -29,7 +29,7 @@ int printInt(va_list ap, char __attribute__((unused))*buff, int flag,
 
 	if (flag == '+') /* IF flag is equal to '+' */
 	{
-		if (width == 0 && num > 0) /* IF width is 0 and num is positive */
+		if (width == 0 && num >= 0) /* IF width is 0 and num is positive */
 			number_D_printed += _putchar('+'); /* Print '+' before printing num */
 	}
 
@@ -53,7 +53,7 @@ int printInt(va_list ap, char __attribute__((unused))*buff, int flag,
 				number_D_printed += _putchar(flag);
 		}
 
-		if (flag == '+' && num > 0) /* IF flag is '+' and num is positive*/
+		if (flag == '+' && num >= 0) /* IF flag is '+' and num is positive*/
 			number_D_printed += _putchar('+'); /* Print '+' before printing num */
 	}
 	number_D_printed += print_num_assist(num);
@@ -74,7 +74,7 @@ int print_num_assist(int n) /* Using recursion */
 	if (n < 0)/* IF number is negative, print '-' minus */
 	{
 		counter += _putchar('-'); /*print minus */
-		n = n * -1; /* Getting the absolute value of num */
+		n *= -1; /* Getting the absolute value of num */
 	}
 	if (n > 9)
 	{
