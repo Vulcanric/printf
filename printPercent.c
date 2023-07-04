@@ -13,14 +13,12 @@
 int printPercent(va_list ap, char __attribute__((unused))*buff,
 		int flag, int width, int precision, int len_modif)
 {
-	int char_printed;
+	int char_printed = 1;
 	(void)ap;
 	(void)flag;
 	(void)width;
 	(void)precision;
 	(void)len_modif;
-
-	char_printed = _putchar('%');
 
 	return (char_printed);
 }
