@@ -17,6 +17,8 @@ int (*handleformt(char conv_spec))(va_list ap, char *buff, int, int, int, int)
 		{'r', printRev},
 		{'R', printRot13},
 		{'b', printBin},
+		{'X', printHex_upper},
+		{'x', printHex_lower},
 		{0, 0}
 	};
 	int i = 0;
