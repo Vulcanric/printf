@@ -19,6 +19,7 @@ int (*handleformt(char conv_spec))(va_list ap, char *buff, int, int, int, int)
 		{'b', printBin},
 		{'X', printHex_upper},
 		{'x', printHex_lower},
+		{'p', print_pointer},
 		{0, 0}
 	};
 	int i = 0;
