@@ -35,6 +35,8 @@ int printRot13(va_list ap, char *buff, int flag, int width,
 		int precision, int len_modif);
 int printBin(va_list ap, char *buff, int flag, int width,
 		int precision, int len_modif);
+int print_pointer(va_list types, char buffer[],
+		int flags, int width, int precision, int size);
 int (*handleformt(char conv_spec))(va_list, char *, int, int, int, int);
 
 /* Functions for finding the value of formatting options */
